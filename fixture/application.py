@@ -2,6 +2,7 @@ from selenium import webdriver
 from fixture.session import SessionHelper
 from selenium.webdriver.common.by import By
 from fixture.project import ProjectHelper
+from fixture.soap import SoapHelper
 
 
 
@@ -19,6 +20,7 @@ class Application:
         self.session = SessionHelper(self)
         self.base_url = base_url
         self.project = ProjectHelper(self)
+        self.soap = SoapHelper(self)
 
 
     # def login(self, username, password):

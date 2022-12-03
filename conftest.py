@@ -19,15 +19,16 @@ def load_config(file):
             target = json.load(file)
     return target
 
+
 @pytest.fixture
 def app(request):
     global fixture
-
     browser = request.config.getoption("--browser")
     web_config = load_config(request.config.getoption("--target"))['web']
-
+    credentials = load_config(request.config.getoption("--target"))['webadmin']
     if fixture is None or not fixture.is_valid():
         fixture = Application(browser=browser, base_url=web_config["base_url"])
+        fixture.session.login(username=credentials["username"], password=credentials["password"])
     return fixture
 
 

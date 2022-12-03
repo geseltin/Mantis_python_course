@@ -1,4 +1,4 @@
-
+from selenium.webdriver.common.by import By
 
 
 class SessionHelper:
@@ -8,18 +8,17 @@ class SessionHelper:
 
     def login(self, username, password):
         wd = self.app.wd
-        # Открыть страницу логина
         self.app.open_home_page()
-        wd.find_element_by_name("username").clear()
-        wd.find_element_by_name("username").send_keys(username)
-        wd.find_element_by_name("password").clear()
-        wd.find_element_by_name("password").send_keys(password)
-        wd.find_element_by_xpath("//input[@type='submit']").click()
+        wd.find_element(By.NAME, "username").clear()
+        wd.find_element(By.NAME,"username").send_keys(username)
+        wd.find_element(By.NAME,"password").clear()
+        wd.find_element(By.NAME,"password").send_keys(password)
+        wd.find_element(By.XPATH,"//input[@type='submit']").click()
 
 
     def logout(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("Logout").click()
+        wd.find_element(By.LINK_TEXT,"Logout").click()
 
     def ensure_logout(self):
         wd = self.app.wd
@@ -28,7 +27,7 @@ class SessionHelper:
 
     def is_logged_in(self):
         wd = self.app.wd
-        return len(wd.find_elements_by_link_text("Logout")) > 0
+        return len(wd.find_elements(By.LINK_TEXT,"Logout")) > 0
 
     def ensure_login(self, username, password):
         wd = self.app.wd
@@ -46,4 +45,4 @@ class SessionHelper:
 
     def get_logged_in_user(self):
         wd = self.app.wd
-        return wd.find_element_by_css_selector(f"td.login-info-left span").text
+        return wd.find_element(By.CSS_SELECTOR,f"td.login-info-left span").text

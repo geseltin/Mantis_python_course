@@ -1,5 +1,7 @@
 from selenium import webdriver
 from fixture.session import SessionHelper
+from selenium.webdriver.common.by import By
+from fixture.project import ProjectHelper
 
 
 
@@ -16,17 +18,18 @@ class Application:
             raise ValueError(f"Unrecognized browser {browser}")
         self.session = SessionHelper(self)
         self.base_url = base_url
+        self.project = ProjectHelper(self)
 
 
     # def login(self, username, password):
     #     wd = self.wd
     #     # Открыть страницу логина
     #     self.open_home_page()
-    #     wd.find_element_by_name("user").clear()
-    #     wd.find_element_by_name("user").send_keys(username)
-    #     wd.find_element_by_name("pass").clear()
-    #     wd.find_element_by_name("pass").send_keys(password)
-    #     wd.find_element_by_xpath("//input[@value='Login']").click()
+    #     wd.find_element_by_name("username").clear()
+    #     wd.find_element_by_name("username").send_keys(username)
+    #     wd.find_element_by_name("password").clear()
+    #     wd.find_element_by_name("password").send_keys(password)
+    #     wd.find_element_by_xpath("//input[@type='submit']").click()
 
     def open_home_page(self):
         wd = self.wd

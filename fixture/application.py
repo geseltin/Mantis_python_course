@@ -8,7 +8,7 @@ from fixture.soap import SoapHelper
 
 
 class Application:
-    def __init__(self, browser, base_url):
+    def __init__(self, browser, config):
         if browser == "chrome":
             self.wd = webdriver.Chrome()
         elif browser == "firefox":
@@ -18,9 +18,10 @@ class Application:
         else:
             raise ValueError(f"Unrecognized browser {browser}")
         self.session = SessionHelper(self)
-        self.base_url = base_url
+        self.base_url = config['web']['base_url']
         self.project = ProjectHelper(self)
         self.soap = SoapHelper(self)
+        self.config = config
 
 
     # def login(self, username, password):
